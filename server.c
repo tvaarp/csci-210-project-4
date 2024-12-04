@@ -51,7 +51,7 @@ int main() {
 				perror("Error writing to target FIFO");
 			}
 			else {
-				printf("Message sent successfully to %s.\n", req.target);
+				// printf("Message sent successfully to %s.\n", req.target);
 			}
 
 			// close target FIFO
