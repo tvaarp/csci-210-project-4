@@ -42,12 +42,12 @@ void sendmsg (char *user, char *target, char *msg) {
 	}
 
 	// prepare message
-	strncpy(messageToSend.source, user, sizeof(messageToSend.source)-1);
-	messageToSend.source[sizeof(messageToSend.source)-1] = '\0';
-	strncpy(messageToSend.target, target, sizeof(messageToSend.target)-1);
-	messageToSend.target[sizeof(messageToSend.target)-1] = '\0';
-	strncpy(messageToSend.msg, msg, sizeof(messageToSend.msg)-1);
-	messageToSend.msg[sizeof(messageToSend.msg)-1] = '\0';
+	//strncpy(messageToSend.source, user, sizeof(messageToSend.source)-1);
+	//strncpy(messageToSend.target, target, sizeof(messageToSend.target)-1);
+	//strncpy(messageToSend.msg, msg, sizeof(messageToSend.msg)-1);
+	strcpy(messageToSend.source, user);
+	strcpy(messageToSend.target, target);
+	strcpy(messageToSend.msg, msg);
 
 	// write message to server FIFO
 	if (write(serverFIFO, &messageToSend, sizeof(messageToSend)) == -1) {
@@ -80,7 +80,7 @@ void* messageListener(void *arg) {
 		pthread_exit((void*)1);
 	}
 
-	while (TRUE) {
+	while (1) {
 		// read and print messages from FIFO
 		if (read(fifoFD, &incomingMessage, sizeof(incomingMessage)) > 0) {
 			printf("Incoming message from %s: %s\n", incomingMessage.source, incomingMessage.msg);
