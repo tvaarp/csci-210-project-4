@@ -43,8 +43,11 @@ void sendmsg (char *user, char *target, char *msg) {
 
 	// prepare message
 	strncpy(messageToSend.source, user, sizeof(messageToSend.source)-1);
+	messageToSend.source[sizeof(messageToSend.source)-1] = '\0';
 	strncpy(messageToSend.target, target, sizeof(messageToSend.target)-1);
-	strncpy(messageToSend.msg, msg, sizeof(messageToSend)-1);
+	messageToSend.target[sizeof(messageToSend.target)-1] = '\0';
+	strncpy(messageToSend.msg, msg, sizeof(messageToSend.msg)-1);
+	messageToSend.msg[sizeof(messageToSend.msg)-1] = '\0';
 
 	// write message to server FIFO
 	if (write(serverFIFO, &messageToSend, sizeof(messageToSend)) == -1) {

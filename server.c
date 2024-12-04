@@ -31,7 +31,7 @@ int main() {
 		// TODO:
 		// read requests from serverFIFO
 
-		if (read(server, &req, size(req)) > 0) {
+		if (read(server, &req, sizeof(req)) > 0) {
 			// requests
 			printf("Received a request from %s to send the message %s to %s.\n",req.source,req.msg,req.target);
 
